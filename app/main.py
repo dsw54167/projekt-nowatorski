@@ -16,6 +16,12 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 def get_db():
+    """
+    Returns a database session.
+
+    This function is a dependency injection (DI) mechanism for FastAPI,
+    ensuring that a database session is injected into each API endpoint.
+    """
     db = SESSION_LOCAL()
     try:
         yield db
