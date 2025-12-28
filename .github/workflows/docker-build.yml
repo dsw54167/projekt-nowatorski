@@ -9,9 +9,6 @@ on:
       registry:
         required: true
         type: string
-    secrets:
-      CR_PAT:
-        required: true
 
 jobs:
   build:
@@ -24,7 +21,7 @@ jobs:
         with:
           registry: ${{ inputs.registry }}
           username: ${{ github.actor }}
-          password: ${{ secrets.CR_PAT }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push
         uses: docker/build-push-action@v5
