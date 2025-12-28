@@ -3,8 +3,6 @@ name: Lint Python code
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
   pylint:

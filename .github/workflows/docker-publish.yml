@@ -1,0 +1,12 @@
+name: Publish Docker Image
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  publish:
+    uses: ./.github/workflows/docker-build.yml
+    with:
+      image_name: latest
+      registry: ghcr.io
