@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 
-from .database import SessionLocal, engine, Base
+from .database import SESSION_LOCAL, engine, Base
 from . import service, schemas
 
 Base.metadata.create_all(bind=engine)
@@ -9,7 +9,7 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 def get_db():
-    db = SessionLocal()
+    db = SESSION_LOCAL()
     try:
         yield db
     finally:
@@ -26,4 +26,3 @@ def read_users(db: Session = Depends(get_db)):
 @app.get("/health")
 def health():
     return {"status": "ok"}
-

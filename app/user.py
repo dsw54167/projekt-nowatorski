@@ -2,7 +2,7 @@
 from sqlalchemy import Column, Integer, String
 from .database import Base
 
-class User(Base):
+class User(Base): # pylint: disable=too-few-public-methods
     """User database model.
 
    Represents a user in the database with basic information
