@@ -16,6 +16,7 @@ class UserCreate(BaseModel):  # pylint: disable=too-few-public-methods
     """
     name: str
     email: str
+    description: str
 
 
 class User(UserCreate):  # pylint: disable=too-few-public-methods
