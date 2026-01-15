@@ -1,0 +1,27 @@
+name: deploy.yml
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    if: ${{ github.event.docker-publish.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy on VM via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VM_IP }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            docker pull ghcr.io/dsw54167/projekt-nowatorski:latest
+            docker stop my-app || true
+            docker rm my-app || true
+            docker run -d \
+              --name user-app \
+              -p 8000:8000 \
+              --env-file .env
+              --restart unless-stopped \
+               ghcr.io/dsw54167/projekt-nowatorski:latest
