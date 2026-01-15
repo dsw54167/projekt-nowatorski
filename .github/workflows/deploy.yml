@@ -8,13 +8,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Debug secrets presence
-        run: |
-          echo "VM_HOST set: ${{ secrets.VM_HOST != '' }}"
-          echo "VM_USER set: ${{ secrets.VM_USER != '' }}"
-          echo "VM_SSH_KEY set: ${{ secrets.VM_SSH_KEY != '' }}"
-          echo "VM_HOST set: ${{ secrets.VM_HOST }}"
-          echo "VM_USER set: ${{ secrets.VM_USER }}"
       - name: Deploy on VM via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -26,8 +19,8 @@ jobs:
             docker stop my-app || true
             docker rm my-app || true
             docker run -d \
-              --name user-app \
+              --name my-app \
               -p 8000:8000 \
-              --env-file .env
+              --env-file .env \
               --restart unless-stopped \
                ghcr.io/dsw54167/projekt-nowatorski:latest
