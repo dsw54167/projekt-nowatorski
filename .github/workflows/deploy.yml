@@ -13,6 +13,8 @@ jobs:
           echo "VM_HOST set: ${{ secrets.VM_HOST != '' }}"
           echo "VM_USER set: ${{ secrets.VM_USER != '' }}"
           echo "VM_SSH_KEY set: ${{ secrets.VM_SSH_KEY != '' }}"
+          echo "VM_HOST set: ${{ secrets.VM_HOST }}"
+          echo "VM_USER set: ${{ secrets.VM_USER }}"
       - name: Deploy on VM via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
